@@ -5,13 +5,14 @@
 ## 文件结构
 
 ```text
-book/
+.
 ├── index.html                  # 封面、扉页信息与目录
 ├── ch01-getting-started.html   # 第 1 章：开始入门
 ├── ch15-smart-pointers.html    # 第 15 章：智能指针
 ├── img/                        # 章节插图（官方 SVG）
 ├── style.css                   # 全站样式
 ├── book.js                     # 目录、阅读进度、代码复制
+├── rust-logo.svg               # 官方 Rust Logo
 └── favicon.svg
 ```
 
@@ -40,4 +41,4 @@ book/
 python -m http.server 8000
 ```
 
-然后访问 <http://localhost:8000/book/>。
+然后访问 <http://localhost:8000/>。
