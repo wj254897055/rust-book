@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Rust 程序设计语言 · 中文翻译</title>
+  <meta name="description" content="《Rust 程序设计语言》官方教程中文翻译，第 1 章已翻译。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="cover-page">
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <div class="cover">
+    <aside class="cover-spine" aria-label="书名">
+      <div>
+        <p class="spine-label">Rust 官方教程</p>
+        <div class="spine-rule"></div>
+      </div>
+
+      <img class="spine-mark" src="rust-logo.svg" alt="" aria-hidden="true">
+
+      <div class="spine-foot">
+        <p>The Rust Programming Language</p>
+        <p>Rust 1.97.0 · Edition 2024</p>
+      </div>
+    </aside>
+
+    <main id="main" class="cover-main">
+      <header class="cover-hero">
+        <h1 class="cover-title">
+          <span class="latin">Rust</span>
+          <span class="cn">程序设计语言</span>
+        </h1>
+
+        <p class="cover-lede">
+          一门赋予每个人构建可靠且高效软件能力的语言。
+        </p>
+
+        <dl class="book-meta">
+          <div>
+            <dt>作者</dt>
+            <dd>Steve Klabnik<br>Carol Nichols<br>Chris Krycho</dd>
+          </div>
+          <div>
+            <dt>版本</dt>
+            <dd>Rust 1.97.0<br>Edition 2024</dd>
+          </div>
+          <div>
+            <dt>翻译进度</dt>
+            <dd>第 1、15 章已完成<br>共 20 章</dd>
+          </div>
+        </dl>
+      </header>
+
+      <section class="contents" id="contents" aria-labelledby="contents-title">
+        <div class="contents-head">
+          <h2 id="contents-title">目录</h2>
+          <span>02 / 20 已翻译</span>
+        </div>
+
+        <div class="toc-grid" aria-label="章节列表">
+          <a class="toc-row is-available" href="ch01-getting-started.html">
+            <span class="n">01</span><span class="t">开始入门</span><span class="s">已翻译</span>
+          </a>
+          <div class="toc-row"><span class="n">02</span><span class="t">猜数字游戏</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">03</span><span class="t">常见编程概念</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">04</span><span class="t">认识所有权</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">05</span><span class="t">使用结构体组织相关联的数据</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">06</span><span class="t">枚举与模式匹配</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">07</span><span class="t">使用包、Crate 和模块管理不断增长的项目</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">08</span><span class="t">常见集合</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">09</span><span class="t">错误处理</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">10</span><span class="t">泛型、Trait 和生命周期</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">11</span><span class="t">编写自动化测试</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">12</span><span class="t">一个 I/O 项目：构建命令行程序</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">13</span><span class="t">迭代器与闭包</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">14</span><span class="t">更多关于 Cargo 和 Crates.io 的内容</span><span class="s">待翻译</span></div>
+          <a class="toc-row is-available" href="ch15-smart-pointers.html">
+            <span class="n">15</span><span class="t">智能指针</span><span class="s">已翻译</span>
+          </a>
+          <div class="toc-row"><span class="n">16</span><span class="t">无畏并发</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">17</span><span class="t">Rust 的面向对象编程特性</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">18</span><span class="t">模式与匹配</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">19</span><span class="t">高级特性</span><span class="s">待翻译</span></div>
+          <div class="toc-row"><span class="n">20</span><span class="t">最后的项目：构建多线程 Web 服务器</span><span class="s">待翻译</span></div>
+        </div>
+      </section>
+
+      <section class="about-book" aria-labelledby="about-title">
+        <h2 id="about-title">关于本版本</h2>
+
+        <p>
+          本版内容假定你使用的是 Rust 1.97.0（2026-07-09 发布）或更高版本，并且所有项目的
+          <code>Cargo.toml</code> 中均设置了 <code>edition = "2024"</code>，以便采用
+          Rust 2024 Edition 的惯用法。有关安装或更新 Rust 的说明，请参阅
+          <a href="ch01-getting-started.html#installation">第 1 章的“安装”一节</a>；
+          有关 Edition 的信息，请参阅
+          <a href="https://doc.rust-lang.org/book/appendix-05-editions.html" target="_blank" rel="noopener noreferrer">附录 E</a>。
+        </p>
+
+        <p>
+          HTML 格式可在
+          <a href="https://doc.rust-lang.org/stable/book/" target="_blank" rel="noopener noreferrer">https://doc.rust-lang.org/stable/book/</a>
+          在线获取，也可以通过 <code>rustup</code> 安装的 Rust 离线阅读；运行
+          <code>rustup doc --book</code> 即可打开。
+        </p>
+
+        <p>
+          还有若干
+          <a href="https://doc.rust-lang.org/book/appendix-06-translation.html" target="_blank" rel="noopener noreferrer">社区翻译版本</a>
+          可供选择。
+        </p>
+
+        <p>
+          本书的纸质版和电子书版由
+          <a href="https://nostarch.com/rust-programming-language-3rd-edition" target="_blank" rel="noopener noreferrer">No Starch Press</a>
+          出版。
+        </p>
+
+        <p>
+          想要更具互动性的学习体验？可以试试另一个版本的 Rust Book，它包含测验、高亮、可视化等内容：
+          <a href="https://rust-book.cs.brown.edu" target="_blank" rel="noopener noreferrer">https://rust-book.cs.brown.edu</a>。
+        </p>
+      </section>
+
+      <footer class="cover-footer">
+        <p>
+          根据 <em>The Rust Programming Language</em> 翻译。原文由 Steve Klabnik、Carol Nichols 和
+          Chris Krycho 编写，Rust 社区参与贡献。原文采用 MIT / Apache-2.0 双许可。
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

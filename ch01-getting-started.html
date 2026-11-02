@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>第 1 章 开始入门 · Rust 程序设计语言（中文翻译）</title>
+  <meta name="description" content="《Rust 程序设计语言》第一章：安装 Rust、编写 Hello, world!、认识 Cargo。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="chapter-page">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="index.html">Rust 程序设计语言</a>
+    <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="sidebar">目录</button>
+  </header>
+
+  <div class="nav-backdrop" aria-hidden="true"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="章节导航">
+      <div>
+        <a class="book-id" href="index.html">
+          <strong>Rust 程序设计语言</strong>
+          <span>官方教程 · 中文翻译</span>
+        </a>
+      </div>
+
+      <nav aria-label="本书目录">
+        <p class="side-label">第 1 章</p>
+        <a class="side-chapter" href="#getting-started">开始入门</a>
+        <ol class="side-sections">
+          <li><a class="is-active" href="#getting-started">本章导读</a></li>
+          <li><a href="#installation">1.1 安装</a></li>
+          <li><a href="#hello-world">1.2 Hello, World!</a></li>
+          <li><a href="#hello-cargo">1.3 Hello, Cargo!</a></li>
+          <li><a href="#summary">小结</a></li>
+        </ol>
+      </nav>
+
+      <div class="side-progress">
+        <p><span>翻译进度</span><strong>1 / 20</strong></p>
+        <div class="progress-track" aria-hidden="true"><span></span></div>
+        <p class="side-note">第 1 章已完成。后续章节将陆续翻译。</p>
+      </div>
+    </aside>
+
+    <main id="main" class="content">
+      <article class="prose">
+        <header class="chapter-header">
+          <p class="chapter-kicker">第 1 章</p>
+          <h1>开始入门</h1>
+          <p class="chapter-lede">安装 Rust，写下第一个程序，然后用 Cargo 管理真正的项目。</p>
+        </header>
+
+        <section id="getting-started">
+          <p class="lead">让我们开始你的 Rust 之旅！要学的东西很多，但每段旅程都有起点。本章将讨论：</p>
+          <ul>
+            <li>在 Linux、macOS 和 Windows 上安装 Rust</li>
+            <li>编写一个打印 <code>Hello, world!</code> 的程序</li>
+            <li>使用 Rust 的包管理器和构建系统 <code>cargo</code></li>
+          </ul>
+        </section>
+
+        <h2 id="installation"><span class="num">1.1</span>安装</h2>
+
+        <p>第一步是安装 Rust。我们将通过 <code>rustup</code> 下载 Rust——这是一个用于管理 Rust 版本及相关工具的命令行工具。下载过程需要联网。</p>
+
+        <aside class="note">
+          <p><span class="note-label">注意</span>如果你出于某些原因不想使用 <code>rustup</code>，请参阅
+            <a href="https://forge.rust-lang.org/infra/other-installation-methods.html" target="_blank" rel="noopener noreferrer">其他 Rust 安装方式</a>
+            页面了解更多选择。</p>
+        </aside>
+
+        <p>以下步骤会安装最新稳定版的 Rust 编译器。Rust 的稳定性保证意味着，本书中所有能够编译的示例，在更新的 Rust 版本中仍将继续编译。不同版本之间的输出可能略有差异，因为 Rust 经常改进错误信息和警告。换句话说，只要你按照这些步骤安装了较新的稳定版 Rust，本书内容应当能按预期工作。</p>
+
+        <h3 id="command-line-notation">命令行记号</h3>
+
+        <p>在本章以及全书中，我们会展示一些在终端中使用的命令。凡是需要你在终端中输入的行，都以 <code>$</code> 开头。你不需要输入 <code>$</code> 字符；它只是表示每条命令开始处的命令行提示符。不以 <code>$</code> 开头的行通常显示上一条命令的输出。此外，PowerShell 专用示例会使用 <code>&gt;</code> 而不是 <code>$</code>。</p>
+
+        <h3 id="installing-rustup-on-linux-or-macos">在 Linux 或 macOS 上安装 <code>rustup</code></h3>
+
+        <p>如果你使用的是 Linux 或 macOS，请打开终端并输入以下命令：</p>
+
+        <pre data-label="终端"><code class="language-console">$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh</code></pre>
+
+        <p>该命令会下载一个脚本并开始安装 <code>rustup</code> 工具，随后由它安装最新稳定版的 Rust。系统可能会提示你输入密码。如果安装成功，会出现下面这一行：</p>
+
+        <pre data-label="输出"><code class="language-text">Rust is installed now. Great!</code></pre>
+
+        <p>你还需要一个<em>链接器</em>（linker），它是 Rust 用来把编译产物组合成一个文件的程序。你的系统很可能已经装有链接器。如果遇到链接器错误，应该安装一个 C 编译器，它通常包含链接器。C 编译器也很有用，因为一些常见的 Rust 包依赖 C 代码，需要 C 编译器才能构建。</p>
+
+        <p>在 macOS 上，可以通过以下命令安装 C 编译器：</p>
+
+        <pre data-label="终端"><code class="language-console">$ xcode-select --install</code></pre>
+
+        <p>Linux 用户通常应根据所用发行版的文档安装 GCC 或 Clang。例如，如果你使用的是 Ubuntu，可以安装 <code>build-essential</code> 包。</p>
+
+        <h3 id="installing-rustup-on-windows">在 Windows 上安装 <code>rustup</code></h3>
+
+        <p>在 Windows 上，请访问
+          <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener noreferrer">https://www.rust-lang.org/tools/install</a>
+          并按照页面说明安装 Rust。安装过程中的某个阶段会提示你安装 Visual Studio，它提供编译程序所需的链接器和本机库。如果这一步需要更多帮助，请参阅
+          <a href="https://rust-lang.github.io/rustup/installation/windows-msvc.html" target="_blank" rel="noopener noreferrer">https://rust-lang.github.io/rustup/installation/windows-msvc.html</a>。
+        </p>
+
+        <p>本书其余部分使用的命令在 <em>cmd.exe</em> 和 PowerShell 中都能运行。如果存在特定差异，我们会说明应该使用哪一个。</p>
+
+        <h3 id="troubleshooting">故障排查</h3>
+
+        <p>要检查 Rust 是否安装正确，请打开 shell 并输入：</p>
+
+        <pre data-label="终端"><code class="language-console">$ rustc --version</code></pre>
+
+        <p>你应该会看到最新稳定版的版本号、提交哈希和提交日期，格式如下：</p>
+
+        <pre data-label="输出"><code class="language-text">rustc x.y.z (abcabcabc yyyy-mm-dd)</code></pre>
+
+        <p>如果看到这些信息，说明 Rust 已成功安装！如果没有看到，请按下面的方法检查 Rust 是否位于 <code>%PATH%</code> 系统变量中。</p>
+
+        <p>在 Windows CMD 中，使用：</p>
+
+        <pre data-label="CMD"><code class="language-cmd">&gt; echo %PATH%</code></pre>
+
+        <p>在 PowerShell 中，使用：</p>
+
+        <pre data-label="PowerShell"><code class="language-powershell">&gt; echo $env:Path</code></pre>
+
+        <p>在 Linux 和 macOS 中，使用：</p>
+
+        <pre data-label="终端"><code class="language-console">$ echo $PATH</code></pre>
+
+        <p>如果这些都没问题，Rust 仍然无法工作，还有几个地方可以寻求帮助。你可以在
+          <a href="https://www.rust-lang.org/community" target="_blank" rel="noopener noreferrer">社区页面</a>
+          找到如何联系其他 Rustacean（我们给自己的一个俏皮称呼）的方法。</p>
+
+        <h3 id="updating-and-uninstalling">更新与卸载</h3>
+
+        <p>通过 <code>rustup</code> 安装 Rust 后，更新到新发布的版本很简单。在 shell 中运行以下更新脚本：</p>
+
+        <pre data-label="终端"><code class="language-console">$ rustup update</code></pre>
+
+        <p>要卸载 Rust 和 <code>rustup</code>，请在 shell 中运行以下卸载脚本：</p>
+
+        <pre data-label="终端"><code class="language-console">$ rustup self uninstall</code></pre>
+
+        <h3 id="reading-the-local-documentation">阅读本地文档</h3>
+
+        <p>Rust 安装时也会包含一份本地文档副本，方便你离线阅读。运行 <code>rustup doc</code> 即可在浏览器中打开本地文档。</p>
+
+        <p>每当标准库提供了某个类型或函数，而你不确定它做什么、怎么用时，就去查应用程序编程接口（API）文档！</p>
+
+        <h3 id="using-text-editors-and-ides">使用文本编辑器与 IDE</h3>
+
+        <p>本书不假定你使用什么工具编写 Rust 代码。几乎任何文本编辑器都能完成工作！不过，许多文本编辑器和集成开发环境（IDE）都内置了 Rust 支持。你总能在 Rust 官网的
+          <a href="https://www.rust-lang.org/tools" target="_blank" rel="noopener noreferrer">工具页面</a>
+          找到一份相当新的编辑器与 IDE 列表。</p>
+
+        <h3 id="working-offline-with-this-book">离线使用本书</h3>
+
+        <p>在若干示例中，我们会用到标准库之外的 Rust 包。要完成这些示例，你要么需要联网，要么需要提前下载好这些依赖。要提前下载依赖，可以运行以下命令。（我们会在后文详细解释 <code>cargo</code> 是什么，以及这些命令分别做了什么。）</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo new get-dependencies
+$ cd get-dependencies
+$ cargo add rand@0.10.1 trpl@0.2.0</code></pre>
+
+        <p>这会把相关包的下载内容缓存起来，之后就不必再次下载。运行完这些命令后，你不需要保留 <code>get-dependencies</code> 文件夹。如果你已经运行过这条命令，就可以在本书其余部分的所有 <code>cargo</code> 命令中加上 <code>--offline</code> 标志，使用这些缓存版本，而不是尝试联网。</p>
+
+        <h2 id="hello-world"><span class="num">1.2</span>Hello, World!</h2>
+
+        <p>现在你已经安装了 Rust，是时候编写第一个 Rust 程序了。学习一门新语言时，传统做法是写一个在屏幕上打印 <code>Hello, world!</code> 的小程序，我们这里也照做！</p>
+
+        <aside class="note">
+          <p><span class="note-label">注意</span>本书假定你对命令行有基本了解。Rust 对你的编辑工具、开发工具或代码存放位置没有特别要求，所以如果你更喜欢使用 IDE 而不是命令行，尽管使用你喜欢的 IDE。许多 IDE 现在都对 Rust 有一定程度的支持；详情请查看 IDE 的文档。Rust 团队一直致力于通过 <code>rust-analyzer</code> 提供出色的 IDE 支持。更多细节请参阅
+            <a href="https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html" target="_blank" rel="noopener noreferrer">附录 D</a>。</p>
+        </aside>
+
+        <h3 id="project-directory-setup">项目目录设置</h3>
+
+        <p>首先创建一个目录来存放 Rust 代码。Rust 并不关心代码放在哪里，但为了本书中的练习和项目，我们建议在主目录下创建一个 <em>projects</em> 目录，并把所有项目都放在那里。</p>
+
+        <p>打开终端，输入以下命令，创建一个 <em>projects</em> 目录，并在其中创建 “Hello, world!” 项目的目录。</p>
+
+        <p>在 Linux、macOS 和 Windows 的 PowerShell 中，输入：</p>
+
+        <pre data-label="终端 / PowerShell"><code class="language-console">$ mkdir ~/projects
+$ cd ~/projects
+$ mkdir hello_world
+$ cd hello_world</code></pre>
+
+        <p>在 Windows CMD 中，输入：</p>
+
+        <pre data-label="CMD"><code class="language-cmd">&gt; mkdir "%USERPROFILE%\projects"
+&gt; cd /d "%USERPROFILE%\projects"
+&gt; mkdir hello_world
+&gt; cd hello_world</code></pre>
+
+        <h3 id="rust-program-basics">Rust 程序基础</h3>
+
+        <p>接下来新建一个源文件，命名为 <em>main.rs</em>。Rust 文件始终以 <em>.rs</em> 扩展名结尾。如果文件名中包含多个单词，惯例是用下划线分隔。例如，使用 <em>hello_world.rs</em>，而不是 <em>helloworld.rs</em>。</p>
+
+        <p>现在打开刚刚创建的 <em>main.rs</em>，输入代码清单 1-1 中的内容。</p>
+
+        <p class="filename">文件名：<code>main.rs</code></p>
+
+        <pre data-label="main.rs"><code class="language-rust">fn main() {
+    println!("Hello, world!");
+}</code></pre>
+
+        <p class="caption"><span>代码清单 1-1</span>：一个打印 <code>Hello, world!</code> 的程序</p>
+
+        <p>保存文件，回到终端，并确保当前位于 <em>~/projects/hello_world</em> 目录。在 Linux 或 macOS 上，输入以下命令来编译并运行文件：</p>
+
+        <pre data-label="终端"><code class="language-console">$ rustc main.rs
+$ ./main
+Hello, world!</code></pre>
+
+        <p>在 Windows 上，请使用 <code>.\main</code> 代替 <code>./main</code>：</p>
+
+        <pre data-label="PowerShell"><code class="language-powershell">&gt; rustc main.rs
+&gt; .\main
+Hello, world!</code></pre>
+
+        <p>无论使用哪种操作系统，终端都应该打印出字符串 <code>Hello, world!</code>。如果没有看到这个输出，请回到安装部分的<a href="#troubleshooting">“故障排查”</a>寻找帮助。</p>
+
+        <p>如果打印出了 <code>Hello, world!</code>，恭喜！你已经正式写下了一个 Rust 程序。这让你成为一名 Rust 程序员——欢迎加入！</p>
+
+        <h3 id="the-anatomy-of-a-rust-program">Rust 程序的解剖</h3>
+
+        <p>让我们详细回顾这个 “Hello, world!” 程序。下面是第一块拼图：</p>
+
+        <pre><code class="language-rust">fn main() {
+
+}</code></pre>
+
+        <p>这几行定义了一个名为 <code>main</code> 的函数。<code>main</code> 函数很特殊：在每个可执行的 Rust 程序中，它总是最先运行的代码。这里，第一行声明了一个名为 <code>main</code>、没有参数、也不返回值的函数。如果有参数，它们会放在括号（<code>()</code>）中。</p>
+
+        <p>函数体包裹在 <code>{}</code> 中。Rust 要求所有函数体都使用花括号。良好的风格是把左花括号放在函数声明同一行，并在两者之间留一个空格。</p>
+
+        <aside class="note">
+          <p><span class="note-label">注意</span>如果你想让 Rust 项目保持统一的代码风格，可以使用名为 <code>rustfmt</code> 的自动格式化工具，按特定风格格式化代码（关于 <code>rustfmt</code> 的更多内容见
+            <a href="https://doc.rust-lang.org/book/appendix-04-useful-development-tools.html" target="_blank" rel="noopener noreferrer">附录 D</a>）。Rust 团队已将此工具与 <code>rustc</code> 一起纳入标准 Rust 发行版，所以它应该已经安装在你的电脑上了！</p>
+        </aside>
+
+        <p><code>main</code> 函数体包含以下代码：</p>
+
+        <pre><code class="language-rust">println!("Hello, world!");</code></pre>
+
+        <p>这一行完成了这个小程序的全部工作：把文本打印到屏幕上。这里有三个重要细节需要注意。</p>
+
+        <p>第一，<code>println!</code> 调用的是一个 Rust 宏。如果它调用的是函数，写法会是 <code>println</code>（不带 <code>!</code>）。Rust 宏是一种编写“生成代码的代码”的方式，用于扩展 Rust 语法，我们会在
+          <a href="https://doc.rust-lang.org/book/ch20-05-macros.html" target="_blank" rel="noopener noreferrer">第 20 章</a>
+          详细讨论。现在你只需要知道，<code>!</code> 表示你调用的是宏而不是普通函数，而且宏并不总是遵循与函数相同的规则。</p>
+
+        <p>第二，你看到了 <code>"Hello, world!"</code> 字符串。我们把这个字符串作为参数传给 <code>println!</code>，它会被打印到屏幕上。</p>
+
+        <p>第三，这一行以分号（<code>;</code>）结尾，表示这个表达式已经结束，下一个表达式可以开始。大多数 Rust 代码行都以分号结尾。</p>
+
+        <h3 id="compilation-and-execution">编译与执行</h3>
+
+        <p>你刚刚运行了一个新建的程序，现在让我们仔细看看这个过程。</p>
+
+        <p>运行 Rust 程序之前，必须先使用 Rust 编译器编译它：输入 <code>rustc</code> 命令，并把源文件名传给它，像这样：</p>
+
+        <pre data-label="终端"><code class="language-console">$ rustc main.rs</code></pre>
+
+        <p>如果你有 C 或 C++ 背景，会发现这和 <code>gcc</code> 或 <code>clang</code> 很像。编译成功后，Rust 会输出一个二进制可执行文件。</p>
+
+        <p>在 Linux、macOS 和 Windows 的 PowerShell 中，可以在 shell 里输入 <code>ls</code> 查看可执行文件：</p>
+
+        <pre data-label="终端 / PowerShell"><code class="language-console">$ ls
+main  main.rs</code></pre>
+
+        <p>在 Linux 和 macOS 上，你会看到两个文件。在 Windows 的 PowerShell 中，你会看到与 CMD 相同的三个文件。在 Windows 的 CMD 中，应输入：</p>
+
+        <pre data-label="CMD"><code class="language-cmd">&gt; dir /B %= /B 选项表示只显示文件名 =%
+main.exe
+main.pdb
+main.rs</code></pre>
+
+        <p>这里显示了扩展名为 <em>.rs</em> 的源代码文件、可执行文件（Windows 上是 <em>main.exe</em>，其他平台上是 <em>main</em>），以及在 Windows 上包含调试信息的 <em>.pdb</em> 文件。接下来，像这样运行 <em>main</em> 或 <em>main.exe</em>：</p>
+
+        <pre data-label="终端"><code class="language-console">$ ./main # 在 Windows 上使用 .\main</code></pre>
+
+        <p>如果你的 <em>main.rs</em> 就是那个 “Hello, world!” 程序，这一行会在终端打印 <code>Hello, world!</code>。</p>
+
+        <p>如果你更熟悉 Ruby、Python 或 JavaScript 这类动态语言，可能不习惯把编译和运行分成两步。Rust 是一门<em>提前编译</em>（ahead-of-time compiled）的语言，这意味着你可以编译程序，然后把可执行文件交给别人，即使对方没有安装 Rust 也能运行。如果你给别人一个 <em>.rb</em>、<em>.py</em> 或 <em>.js</em> 文件，对方需要分别安装 Ruby、Python 或 JavaScript 的实现。但在那些语言中，你只需要一条命令就能编译并运行程序。语言设计中的一切都是权衡。</p>
+
+        <p>对于简单程序，只用 <code>rustc</code> 编译就够了；但随着项目变大，你会希望管理各种选项，并让代码更容易分享。接下来，我们将介绍 Cargo 工具，它会帮助你编写真实世界中的 Rust 程序。</p>
+
+        <h2 id="hello-cargo"><span class="num">1.3</span>Hello, Cargo!</h2>
+
+        <p>Cargo 是 Rust 的构建系统和包管理器。大多数 Rustacean 使用这个工具管理 Rust 项目，因为 Cargo 会替你处理许多任务，比如构建代码、下载代码依赖的库，以及构建这些库。（我们把代码所需的库称为<em>依赖</em>（dependencies）。）</p>
+
+        <p>最简单的 Rust 程序，比如我们目前写的这个，没有任何依赖。如果我们用 Cargo 构建 “Hello, world!” 项目，它只会用到 Cargo 中负责构建代码的那部分。随着你编写更复杂的 Rust 程序，你会添加依赖；而如果用 Cargo 创建项目，添加依赖会容易得多。</p>
+
+        <p>由于绝大多数 Rust 项目都使用 Cargo，本书其余部分也假定你在使用 Cargo。如果你使用安装部分介绍的官方安装程序安装 Rust，Cargo 会随 Rust 一起安装。如果你通过其他方式安装 Rust，可以在终端输入以下命令，检查 Cargo 是否已安装：</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo --version</code></pre>
+
+        <p>如果看到版本号，说明已经安装！如果看到错误，比如 <code>command not found</code>，请查阅你所使用安装方式的文档，了解如何单独安装 Cargo。</p>
+
+        <h3 id="creating-a-project-with-cargo">使用 Cargo 创建项目</h3>
+
+        <p>让我们用 Cargo 创建一个新项目，并看看它与原来的 “Hello, world!” 项目有什么不同。回到 <em>projects</em> 目录（或者你存放代码的其他目录），然后在任意操作系统上运行：</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo new hello_cargo
+$ cd hello_cargo</code></pre>
+
+        <p>第一条命令会创建一个名为 <em>hello_cargo</em> 的新目录和项目。我们把项目命名为 <em>hello_cargo</em>，Cargo 会在同名目录中创建它的文件。</p>
+
+        <p>进入 <em>hello_cargo</em> 目录并列出文件。你会看到 Cargo 为我们生成了两个文件和一个目录：一个 <em>Cargo.toml</em> 文件，以及一个包含 <em>main.rs</em> 的 <em>src</em> 目录。</p>
+
+        <p>它还初始化了一个新的 Git 仓库，以及一个 <em>.gitignore</em> 文件。如果在已有的 Git 仓库中运行 <code>cargo new</code>，则不会生成 Git 文件；你可以使用 <code>cargo new --vcs=git</code> 覆盖这一行为。</p>
+
+        <aside class="note">
+          <p><span class="note-label">注意</span>Git 是一种常见的版本控制系统。你可以使用 <code>--vcs</code> 标志，让 <code>cargo new</code> 使用其他版本控制系统，或者不使用版本控制。运行 <code>cargo new --help</code> 查看可用选项。</p>
+        </aside>
+
+        <p>用你喜欢的文本编辑器打开 <em>Cargo.toml</em>。它应该与代码清单 1-2 类似。</p>
+
+        <p class="filename">文件名：<code>Cargo.toml</code></p>
+
+        <pre data-label="Cargo.toml"><code class="language-toml">[package]
+name = "hello_cargo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]</code></pre>
+
+        <p class="caption"><span>代码清单 1-2</span>：<code>cargo new</code> 生成的 <em>Cargo.toml</em> 内容</p>
+
+        <p>这个文件采用 <a href="https://toml.io" target="_blank" rel="noopener noreferrer">TOML</a>（<em>Tom's Obvious, Minimal Language</em>，Tom 的直观极简语言）格式，这是 Cargo 的配置格式。</p>
+
+        <p>第一行 <code>[package]</code> 是一个节标题，表示接下来的语句正在配置一个包。随着我们向这个文件添加更多信息，还会加入其他节。</p>
+
+        <p>接下来的三行设置了 Cargo 编译程序所需的配置信息：名称、版本，以及要使用的 Rust Edition。我们会在
+          <a href="https://doc.rust-lang.org/book/appendix-05-editions.html" target="_blank" rel="noopener noreferrer">附录 E</a>
+          讨论 <code>edition</code> 键。</p>
+
+        <p>最后一行 <code>[dependencies]</code> 是一个节的开始，用于列出项目的依赖。在 Rust 中，代码包被称为 <em>crate</em>。这个项目不需要其他 crate，但第 2 章的第一个项目会用到，所以届时我们会使用这个依赖节。</p>
+
+        <p>现在打开 <em>src/main.rs</em> 看看：</p>
+
+        <p class="filename">文件名：<code>src/main.rs</code></p>
+
+        <pre data-label="src/main.rs"><code class="language-rust">fn main() {
+    println!("Hello, world!");
+}</code></pre>
+
+        <p>Cargo 已经为你生成了一个 “Hello, world!” 程序，就像我们在代码清单 1-1 中写的一样！到目前为止，我们的项目与 Cargo 生成的项目之间的区别是：Cargo 把代码放在 <em>src</em> 目录中，并且顶层目录里有一个 <em>Cargo.toml</em> 配置文件。</p>
+
+        <p>Cargo 期望源文件位于 <em>src</em> 目录中。顶层项目目录只用于 README、许可证信息、配置文件，以及其他与代码无关的内容。使用 Cargo 有助于组织项目。每个东西都有自己的位置，而每个东西都在自己的位置上。</p>
+
+        <p>如果你像我们创建 “Hello, world!” 项目那样，创建了一个不使用 Cargo 的项目，也可以把它转换成使用 Cargo 的项目。把项目代码移到 <em>src</em> 目录，并创建一个合适的 <em>Cargo.toml</em> 文件。获得这个 <em>Cargo.toml</em> 的一个简单方法是运行 <code>cargo init</code>，它会自动为你创建。</p>
+
+        <h3 id="building-and-running-a-cargo-project">构建并运行 Cargo 项目</h3>
+
+        <p>现在来看看用 Cargo 构建并运行 “Hello, world!” 程序时有什么不同！在 <em>hello_cargo</em> 目录中，输入以下命令构建项目：</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo build
+   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs</code></pre>
+
+        <p>这条命令会在 <em>target/debug/hello_cargo</em>（Windows 上是 <em>target\debug\hello_cargo.exe</em>）中创建可执行文件，而不是在当前目录中。由于默认构建是调试构建，Cargo 会把二进制文件放在名为 <em>debug</em> 的目录里。你可以用以下命令运行它：</p>
+
+        <pre data-label="终端"><code class="language-console">$ ./target/debug/hello_cargo # 在 Windows 上使用 .\target\debug\hello_cargo.exe
+Hello, world!</code></pre>
+
+        <p>如果一切顺利，终端应该打印 <code>Hello, world!</code>。第一次运行 <code>cargo build</code> 还会让 Cargo 在顶层创建一个新文件：<em>Cargo.lock</em>。这个文件记录项目中依赖的精确版本。这个项目没有依赖，所以文件内容很少。你永远不需要手动修改这个文件；Cargo 会替你管理它的内容。</p>
+
+        <p>我们刚刚用 <code>cargo build</code> 构建了项目，并用 <code>./target/debug/hello_cargo</code> 运行它；不过也可以使用 <code>cargo run</code>，用一条命令完成编译并运行生成的可执行文件：</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/hello_cargo`
+Hello, world!</code></pre>
+
+        <p>使用 <code>cargo run</code> 比记住先运行 <code>cargo build</code>、再使用完整路径运行二进制文件方便得多，所以大多数开发者会使用 <code>cargo run</code>。</p>
+
+        <p>注意，这一次没有看到 Cargo 正在编译 <code>hello_cargo</code> 的输出。Cargo 发现文件没有变化，所以没有重新构建，而是直接运行了二进制文件。如果你修改了源代码，Cargo 会在运行前重新构建项目，你会看到类似这样的输出：</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo run
+   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs
+     Running `target/debug/hello_cargo`
+Hello, world!</code></pre>
+
+        <p>Cargo 还提供了 <code>cargo check</code> 命令。这个命令会快速检查代码，确保它可以编译，但不生成可执行文件：</p>
+
+        <pre data-label="终端"><code class="language-console">$ cargo check
+   Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs</code></pre>
+
+        <p>为什么可能不想要可执行文件呢？通常，<code>cargo check</code> 比 <code>cargo build</code> 快得多，因为它跳过了生成可执行文件的步骤。如果你在写代码时持续检查工作成果，使用 <code>cargo check</code> 可以更快地告诉你项目是否仍能编译！因此，许多 Rustacean 在写程序时会定期运行 <code>cargo check</code>，确认代码可以编译；等到准备使用可执行文件时，再运行 <code>cargo build</code>。</p>
+
+        <p>让我们回顾一下目前学到的 Cargo 知识：</p>
+
+        <ul>
+          <li>可以使用 <code>cargo new</code> 创建项目。</li>
+          <li>可以使用 <code>cargo build</code> 构建项目。</li>
+          <li>可以使用 <code>cargo run</code> 一步完成构建并运行。</li>
+          <li>可以使用 <code>cargo check</code> 构建项目而不生成二进制文件，以检查错误。</li>
+          <li>Cargo 不把构建结果保存在代码所在目录，而是放在 <em>target/debug</em> 目录中。</li>
+        </ul>
+
+        <p>使用 Cargo 的另一个好处是，无论使用哪种操作系统，命令都相同。因此，从现在开始，我们不再分别提供 Linux/macOS 与 Windows 的特定说明。</p>
+
+        <h3 id="building-for-release">构建发布版本</h3>
+
+        <p>当项目终于准备发布时，可以使用 <code>cargo build --release</code> 以优化方式编译它。这条命令会在 <em>target/release</em> 而不是 <em>target/debug</em> 中创建可执行文件。优化会让 Rust 代码运行得更快，但开启优化会延长编译时间。这就是为什么有两种不同的配置（profile）：一种用于开发，此时你希望快速、频繁地重新构建；另一种用于构建最终交给用户的程序，这个程序不会被反复重新构建，并且要尽可能快地运行。如果你要对代码的运行时间做基准测试，务必运行 <code>cargo build --release</code>，并使用 <em>target/release</em> 中的可执行文件进行测试。</p>
+
+        <h3 id="leveraging-cargos-conventions">利用 Cargo 的约定</h3>
+
+        <p>对于简单项目，Cargo 相比直接使用 <code>rustc</code> 并没有带来太多价值，但随着程序变得更复杂，它会证明自己的价值。一旦程序增长到多个文件或需要依赖，让 Cargo 协调构建就会容易得多。</p>
+
+        <p>尽管 <code>hello_cargo</code> 项目很简单，但它现在已经用到了你今后 Rust 生涯中会使用的许多真实工具。事实上，要处理任何现有项目，你都可以使用以下命令通过 Git 检出代码、切换到该项目目录并构建：</p>
+
+        <pre data-label="终端"><code class="language-console">$ git clone example.org/someproject
+$ cd someproject
+$ cargo build</code></pre>
+
+        <p>有关 Cargo 的更多信息，请查看
+          <a href="https://doc.rust-lang.org/cargo/" target="_blank" rel="noopener noreferrer">它的文档</a>。</p>
+
+        <h2 id="summary">小结</h2>
+
+        <p>你的 Rust 之旅已经有了一个很好的开始！在本章中，你学会了如何：</p>
+
+        <ul>
+          <li>使用 <code>rustup</code> 安装最新稳定版的 Rust。</li>
+          <li>更新到更新的 Rust 版本。</li>
+          <li>打开本地安装的文档。</li>
+          <li>直接使用 <code>rustc</code> 编写并运行 “Hello, world!” 程序。</li>
+          <li>按照 Cargo 的约定创建并运行新项目。</li>
+        </ul>
+
+        <p>现在是构建一个更完整的程序、熟悉 Rust 代码读写的好时机。因此，第 2 章我们将构建一个猜数字游戏。如果你更愿意先学习 Rust 中常见的编程概念，可以先阅读
+          <a href="https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html" target="_blank" rel="noopener noreferrer">第 3 章</a>，
+          然后再回到
+          <a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html" target="_blank" rel="noopener noreferrer">第 2 章</a>。</p>
+      </article>
+
+      <nav class="pager" aria-label="翻页">
+        <a href="index.html">
+          <span class="pager-label">上一页</span>
+          <span class="pager-title">返回封面与目录</span>
+        </a>
+        <span class="is-disabled next">
+          <span class="pager-label">下一章</span>
+          <span class="pager-title">第 2 章 猜数字游戏（待翻译）</span>
+        </span>
+      </nav>
+
+      <footer class="page-footer">
+        <p>
+          本页根据 <em>The Rust Programming Language</em> 第 1 章翻译。原文由 Steve Klabnik、Carol Nichols 和
+          Chris Krycho 编写，Rust 社区参与贡献。原文采用 MIT / Apache-2.0 双许可。
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="book.js"></script>
+</body>
+</html>
